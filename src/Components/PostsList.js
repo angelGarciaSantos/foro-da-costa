@@ -6,7 +6,7 @@ const PostsList = props => {
     <ul>
       {props.posts.map(post => (
         <Post
-          key={post.id}
+          key={post._id}
           post={post}
           openPostDetailProps={props.openPostDetailProps}
         />

@@ -23,7 +23,7 @@ const Post = props => {
   //   textDecoration: "line-through",
   // }
 
-  const { user, id, title, content, date } = props.post
+  const { user, _id, title, content, date } = props.post
 
   // let viewMode = {}
   // let editMode = {}
@@ -43,9 +43,9 @@ const Post = props => {
   let fDate = Moment(date).format('DD/MM/YYYY');
 
   return (
-    <li className="tc pa3 center b--dashed bw1 b--black-30 dim mv2" onClick={() => props.openPostDetailProps(id)}>
+    <li className="tc pa3 center b--dashed bw1 b--black-30 dim mv2" onClick={() => props.openPostDetailProps(_id)}>
       <p className="courier f4">{title}</p>
-      <p className="courier f5">por {user}, {fDate}] </p>
+      <p className="courier f5">por {user}, {fDate} </p>
       {/* <Moment format="YYYY/MM/DD">{date}</Moment> */}
     </li>
 

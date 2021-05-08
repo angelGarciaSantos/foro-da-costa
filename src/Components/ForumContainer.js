@@ -34,33 +34,33 @@ const ForumContainer = () => {
 //     //     return data.posts;
 //     });
     //mockup posts
-    let newDate = new Date()
-    return [{id: 1, 
-        title: "Empieza la temporada de setas.", 
-        content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
-        user: "Ángel", 
-        date: newDate},
-        {id: 2, 
-        title: "Tremendo tractor teño, entrade a ver fotitos", 
-        content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
-        user: "Mario", 
-        date: newDate},
-        {id: 3, 
-        title: "You, unha pizza non é cena nin é nada", 
-        content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
-        user: "Pitiño", 
-        date: newDate},
-        {id: 4, 
-        title: "Informe desde Ukraine", 
-        content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
-        user: "Juan", 
-        date: newDate},
-        {id: 5, 
-        title: "Tades no asador migus?", 
-        content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
-        user: "Santi", 
-        date: newDate},
-        ]
+    // let newDate = new Date()
+    // return [{id: 1, 
+    //     title: "Empieza la temporada de setas.", 
+    //     content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
+    //     user: "Ángel", 
+    //     date: newDate},
+    //     {id: 2, 
+    //     title: "Tremendo tractor teño, entrade a ver fotitos", 
+    //     content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
+    //     user: "Mario", 
+    //     date: newDate},
+    //     {id: 3, 
+    //     title: "You, unha pizza non é cena nin é nada", 
+    //     content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
+    //     user: "Pitiño", 
+    //     date: newDate},
+    //     {id: 4, 
+    //     title: "Informe desde Ukraine", 
+    //     content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
+    //     user: "Juan", 
+    //     date: newDate},
+    //     {id: 5, 
+    //     title: "Tades no asador migus?", 
+    //     content: "His audiam deserunt in, eum ubique voluptatibus te. In reque dicta usu. Ne rebum dissentiet eam, vim omnis deseruisse id. Ullum deleniti vituperata at quo, insolens complectitur te eos, ea pri dico munere propriae. Vel ferri facilis ut, qui paulo ridens praesent ad. Possim alterum qui cu. Accusamus consulatu ius te, cu decore soleat appareat usu.",
+    //     user: "Santi", 
+    //     date: newDate},
+    //     ]
   }
 
     const openPostDetail = id => {
@@ -70,7 +70,7 @@ const ForumContainer = () => {
     const getPostById = id => {
         let value = -1; //TODO: if -1 prepare a not found post page
         posts.map(post => {
-            if (post.id == id) {
+            if (post._id == id) {
                 value = post;
             }
         });
@@ -92,7 +92,20 @@ const ForumContainer = () => {
           date: newDate,
         }
         setPosts([...posts, newPost]);
-        history.push(`/post/${newPost.id}`);
+
+
+        // POST request using fetch inside useEffect React hook
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newPost)
+        };
+        fetch('https://api-rest-example-21.herokuapp.com/api/post', requestOptions)
+            .then(response => response.json())
+            //.then(data => setPostId(data.id));
+            .then(data => console.log(data.id));
+
+            history.push(`/post/${newPost.id}`);
     }
 
     useEffect(() => {
@@ -100,9 +113,8 @@ const ForumContainer = () => {
         fetch('https://api-rest-example-21.herokuapp.com/api/post')
         .then(response => response.json())
         .then(data => {
-            // TODO: asignar bien los objetos, para que tengan la propiedad key con ids distintos.
-            console.log("PROBANDO");
             //setPosts(data.posts);
+            console.log(`Posts received: ${data.posts}`);
             setPosts(data.posts);
     
             return data.posts;
@@ -125,8 +137,7 @@ const ForumContainer = () => {
         </Route>
         <Route path={"/post/:id"} >     
             <PostDetail
-                getPostById={getPostById} 
-                //post={getPostById(MyComponent())}              
+                getPostById={getPostById}            
             />
         </Route>
         <Route path={"/new"} >     

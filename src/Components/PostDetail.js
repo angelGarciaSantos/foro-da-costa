@@ -11,13 +11,15 @@ const PostDetail = props => {
         return (id);
     }
 
-    const { user, id, title, content, date } = props.getPostById(GetRouteParams());
+    const { user, _id, title, content, date } = props.getPostById(GetRouteParams());
+
+    let fDate = Moment(date).format('DD/MM/YYYY');
 
   return ( //TODO: detect if the post from the url does not exist, and show an error message.
       <div className="tc pa3 center b--dashed bw1 b--black-30 dim ma4">
         <p className="courier f4 tc">{title}</p>
         <p className="courier f5">{content}</p>
-        <p className="courier f6 tc">por {user}, 06/05/2021 </p>
+        <p className="courier f6 tc">por {user}, {fDate} </p>
       </div>
   )
 }
