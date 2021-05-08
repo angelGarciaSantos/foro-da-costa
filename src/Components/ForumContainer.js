@@ -12,19 +12,28 @@ import { v4 as uuidv4 } from "uuid"
 import tachyons from 'tachyons';
 
 const ForumContainer = () => {
-  const [posts, setPosts] = useState(getInitialPosts())
+  const [posts, setPosts] = useState([])
   const history = useHistory();
 
   
-  function getInitialPosts() {
-    // getting stored items
-    // const temp = localStorage.getItem("todos")
-    // const savedTodos = JSON.parse(temp)
-    // return savedTodos || []
+   function getInitialPosts() {
+//     // getting stored items
+//     // const temp = localStorage.getItem("todos")
+//     // const savedTodos = JSON.parse(temp)
+//     // return savedTodos || []
 
+//     // console.log("Obteniendo info del API");
+//     // fetch('https://api-rest-example-21.herokuapp.com/api/post')
+//     // .then(response => response.json())
+//     // .then(data => {
 
+//     //     console.log("PROBANDO");
+//     //     //setPosts(data.posts);
+//     //     setPosts(data.posts);
 
-    // mockup posts
+//     //     return data.posts;
+//     });
+    //mockup posts
     let newDate = new Date()
     return [{id: 1, 
         title: "Empieza la temporada de setas.", 
@@ -54,9 +63,9 @@ const ForumContainer = () => {
         ]
   }
 
-  const openPostDetail = id => {
+    const openPostDetail = id => {
         history.push(`/post/${id}`);
-  }
+    }
 
     const getPostById = id => {
         let value = -1; //TODO: if -1 prepare a not found post page
@@ -71,17 +80,6 @@ const ForumContainer = () => {
 
     const createPost = () => {
         history.push(`/new`);
-
-        // console.log('Creating new post...')
-        // let newDate = new Date()
-        // const newPost = {
-        //   id: 6,
-        //   title: "New Post",
-        //   content: "New Content",
-        //   user: "New User",
-        //   date: newDate,
-        // }
-        // setPosts([...posts, newPost])
     }
 
     const createNewPost = (data) => {
@@ -96,6 +94,20 @@ const ForumContainer = () => {
         setPosts([...posts, newPost]);
         history.push(`/post/${newPost.id}`);
     }
+
+    useEffect(() => {
+        console.log("Obteniendo info del API");
+        fetch('https://api-rest-example-21.herokuapp.com/api/post')
+        .then(response => response.json())
+        .then(data => {
+            // TODO: asignar bien los objetos, para que tengan la propiedad key con ids distintos.
+            console.log("PROBANDO");
+            //setPosts(data.posts);
+            setPosts(data.posts);
+    
+            return data.posts;
+      })
+    },[]);
 
   return (
     <>
