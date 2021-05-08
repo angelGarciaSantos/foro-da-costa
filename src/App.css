@@ -117,6 +117,7 @@ a {
   color: #3fffd2;
   text-transform: uppercase;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .menuNav li:first-child {
@@ -171,3 +172,4 @@ div {
     padding-left: 1%;
     padding-right: 1%;
 }
+

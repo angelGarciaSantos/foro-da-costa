@@ -5,7 +5,11 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Navbar from './NavbarBoot';
 import Logo from '../Assets/Logo.jpg'
 import PostDetail from "./PostDetail";
+import CreatePost from "./CreatePost";
 import { useHistory, useParams } from "react-router-dom";
+// import { Button } from 'react-bootstrap';
+import { v4 as uuidv4 } from "uuid"
+import tachyons from 'tachyons';
 
 const ForumContainer = () => {
   const [posts, setPosts] = useState(getInitialPosts())
@@ -65,7 +69,33 @@ const ForumContainer = () => {
         return value;
     }
 
+    const createPost = () => {
+        history.push(`/new`);
 
+        // console.log('Creating new post...')
+        // let newDate = new Date()
+        // const newPost = {
+        //   id: 6,
+        //   title: "New Post",
+        //   content: "New Content",
+        //   user: "New User",
+        //   date: newDate,
+        // }
+        // setPosts([...posts, newPost])
+    }
+
+    const createNewPost = (data) => {
+        let newDate = new Date()
+        const newPost = {
+          id: uuidv4(),
+          title: data.title,
+          content: data.content,
+          user: "Anónimo",
+          date: newDate,
+        }
+        setPosts([...posts, newPost]);
+        history.push(`/post/${newPost.id}`);
+    }
 
   return (
     <>
@@ -76,11 +106,21 @@ const ForumContainer = () => {
                 posts={posts}
                 openPostDetailProps={openPostDetail}
             />
+            
+            <div className="tc">
+                <a className="courier f6 link dim ba ph3 pv2 mb2 dib mid-gray" onClick={createPost}>Crear nuevo tema</a>
+            </div>
         </Route>
         <Route path={"/post/:id"} >     
             <PostDetail
                 getPostById={getPostById} 
                 //post={getPostById(MyComponent())}              
+            />
+        </Route>
+        <Route path={"/new"} >     
+            <CreatePost
+                createNewPost={createNewPost}
+            
             />
         </Route>
         {/* <Route path="/about">
