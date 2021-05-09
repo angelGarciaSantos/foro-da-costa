@@ -25,7 +25,8 @@ const NavbarBoot = props => {
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
             <Nav.Link href="#/" className="courier" >Inicio</Nav.Link>
-            <Nav.Link href="#link" className="courier" >Mensajes</Nav.Link>
+            <Nav.Link href="#/signup" className="courier" >Registro</Nav.Link>
+            <Nav.Link href="#/signin" className="courier" >Entrar</Nav.Link>
             <NavDropdown title="Opciones" id="basic-nav-dropdown" className="courier">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

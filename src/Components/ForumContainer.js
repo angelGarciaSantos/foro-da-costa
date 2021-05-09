@@ -5,6 +5,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Navbar from './NavbarBoot';
 import Logo from '../Assets/Logo.jpg'
 import PostDetail from "./PostDetail";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 import CreatePost from "./CreatePost";
 import { useHistory, useParams } from "react-router-dom";
 // import { Button } from 'react-bootstrap';
@@ -163,6 +165,16 @@ const ForumContainer = () => {
         <Route path={"/new"} >     
             <CreatePost
                 createNewPost={createNewPost}
+            
+            />
+        </Route>
+        <Route path={"/signin"} >     
+            <SignIn
+            
+            />
+        </Route>
+        <Route path={"/signup"} >     
+            <SignUp
             
             />
         </Route>

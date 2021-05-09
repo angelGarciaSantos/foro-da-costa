@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import tachyons from 'tachyons';
+import TextEditorJodit from "./TextEditorJodit";
 
 const CreatePost = props => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -8,6 +9,11 @@ const CreatePost = props => {
     console.log(data)
     props.createNewPost(data);
 };
+
+
+    const editorContent = (value) => {
+        console.log(value);
+    }
 
   console.log(watch("title")); // watch input value by passing the name of it
   console.log(watch("content")); // watch input value by passing the name of it
