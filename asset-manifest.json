@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/foro-da-costa/static/css/main.645a5466.chunk.css",
-    "main.js": "/foro-da-costa/static/js/main.cbbd6f03.chunk.js",
-    "main.js.map": "/foro-da-costa/static/js/main.cbbd6f03.chunk.js.map",
+    "main.js": "/foro-da-costa/static/js/main.efe546a5.chunk.js",
+    "main.js.map": "/foro-da-costa/static/js/main.efe546a5.chunk.js.map",
     "runtime-main.js": "/foro-da-costa/static/js/runtime-main.29eedfe0.js",
     "runtime-main.js.map": "/foro-da-costa/static/js/runtime-main.29eedfe0.js.map",
     "static/css/2.b2f800ae.chunk.css": "/foro-da-costa/static/css/2.b2f800ae.chunk.css",
-    "static/js/2.f49f2721.chunk.js": "/foro-da-costa/static/js/2.f49f2721.chunk.js",
-    "static/js/2.f49f2721.chunk.js.map": "/foro-da-costa/static/js/2.f49f2721.chunk.js.map",
+    "static/js/2.5affd731.chunk.js": "/foro-da-costa/static/js/2.5affd731.chunk.js",
+    "static/js/2.5affd731.chunk.js.map": "/foro-da-costa/static/js/2.5affd731.chunk.js.map",
     "index.html": "/foro-da-costa/index.html",
     "static/css/2.b2f800ae.chunk.css.map": "/foro-da-costa/static/css/2.b2f800ae.chunk.css.map",
     "static/css/main.645a5466.chunk.css.map": "/foro-da-costa/static/css/main.645a5466.chunk.css.map",
-    "static/js/2.f49f2721.chunk.js.LICENSE.txt": "/foro-da-costa/static/js/2.f49f2721.chunk.js.LICENSE.txt",
+    "static/js/2.5affd731.chunk.js.LICENSE.txt": "/foro-da-costa/static/js/2.5affd731.chunk.js.LICENSE.txt",
     "static/media/Logo.ae621407.jpg": "/foro-da-costa/static/media/Logo.ae621407.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.29eedfe0.js",
     "static/css/2.b2f800ae.chunk.css",
-    "static/js/2.f49f2721.chunk.js",
+    "static/js/2.5affd731.chunk.js",
     "static/css/main.645a5466.chunk.css",
-    "static/js/main.cbbd6f03.chunk.js"
+    "static/js/main.efe546a5.chunk.js"
   ]
 }
