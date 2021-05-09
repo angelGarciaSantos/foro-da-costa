@@ -4,7 +4,7 @@ import Moment from 'moment';
 import tachyons from 'tachyons';
 
 const SignIn = props => {
-
+//TODO: adaptar de SignUp
     return (
 <div>Pending</div>
   )

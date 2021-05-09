@@ -8,8 +8,9 @@ const CreatePost = props => {
   const onSubmit = data => {
     console.log(data)
     props.createNewPost(data);
-};
+  };
 
+  //TODO: adaptar tomando como ejemplo SignUp (configurar todos los formularios igual)
 
     const editorContent = (value) => {
         console.log(value);
