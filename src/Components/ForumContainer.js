@@ -103,12 +103,14 @@ const ForumContainer = () => {
         fetch('https://api-rest-example-21.herokuapp.com/api/post', requestOptions)
             .then(response => response.json())
             //.then(data => setPostId(data.id));
-            .then(data => console.log(data.id));
+            .then(data => {
+                getPosts();
+                history.push(`/`);
+            });
 
-            history.push(`/post/${newPost.id}`);
     }
 
-    useEffect(() => {
+    const getPosts = () => {
         console.log("Obteniendo info del API");
         fetch('https://api-rest-example-21.herokuapp.com/api/post')
         .then(response => response.json())
@@ -118,7 +120,11 @@ const ForumContainer = () => {
             setPosts(data.posts);
     
             return data.posts;
-      })
+        });
+    }
+
+    useEffect(() => {
+        getPosts();
     },[]);
 
   return (
