@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/foro-da-costa/static/css/main.645a5466.chunk.css",
-    "main.js": "/foro-da-costa/static/js/main.5fea0209.chunk.js",
-    "main.js.map": "/foro-da-costa/static/js/main.5fea0209.chunk.js.map",
+    "main.js": "/foro-da-costa/static/js/main.cbbd6f03.chunk.js",
+    "main.js.map": "/foro-da-costa/static/js/main.cbbd6f03.chunk.js.map",
     "runtime-main.js": "/foro-da-costa/static/js/runtime-main.29eedfe0.js",
     "runtime-main.js.map": "/foro-da-costa/static/js/runtime-main.29eedfe0.js.map",
     "static/css/2.b2f800ae.chunk.css": "/foro-da-costa/static/css/2.b2f800ae.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.b2f800ae.chunk.css",
     "static/js/2.f49f2721.chunk.js",
     "static/css/main.645a5466.chunk.css",
-    "static/js/main.5fea0209.chunk.js"
+    "static/js/main.cbbd6f03.chunk.js"
   ]
 }
