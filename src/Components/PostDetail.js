@@ -20,6 +20,7 @@ const PostDetail = props => {
         <p className="courier f4 tc">{title}</p>
         <p className="courier f5">{content}</p>
         <p className="courier f6 tc">por {user}, {fDate} </p>
+        <a className="courier f6 link dim ba ph3 pv2 mb2 dib mid-gray" onClick={props.deletePost.bind(this, _id)}>Eliminar</a>
       </div>
   )
 }

@@ -110,6 +110,19 @@ const ForumContainer = () => {
 
     }
 
+    const deletePost = (id) => {
+        console.log(`Deleting post: ${id}`);
+        fetch(`https://api-rest-example-21.herokuapp.com/api/post/${id}`, {
+            method: 'DELETE',
+            })
+            .then(res => res.text()) // or res.json()
+            .then(res => {
+                console.log(res);
+                getPosts();
+                history.push(`/`); 
+            })
+    }
+
     const getPosts = () => {
         console.log("Obteniendo info del API");
         fetch('https://api-rest-example-21.herokuapp.com/api/post')
@@ -143,7 +156,8 @@ const ForumContainer = () => {
         </Route>
         <Route path={"/post/:id"} >     
             <PostDetail
-                getPostById={getPostById}            
+                getPostById={getPostById}  
+                deletePost={deletePost}          
             />
         </Route>
         <Route path={"/new"} >     

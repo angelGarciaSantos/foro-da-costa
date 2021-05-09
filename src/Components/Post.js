@@ -46,7 +46,6 @@ const Post = props => {
     <li className="tc pa3 center b--dashed bw1 b--black-30 dim mv2" onClick={() => props.openPostDetailProps(_id)}>
       <p className="courier f4">{title}</p>
       <p className="courier f5">por {user}, {fDate} </p>
-      {/* <Moment format="YYYY/MM/DD">{date}</Moment> */}
     </li>
 
     // <li className={styles.item}>
