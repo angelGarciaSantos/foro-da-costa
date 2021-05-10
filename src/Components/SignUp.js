@@ -4,16 +4,16 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-boots
 import { useForm } from "react-hook-form";
 
 
-const SignUp = () => {
+const SignUp = props => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => {
     console.log(data)
-    //props.createNewPost(data);
-    //TODO: crear nuevo metodo en ForumContainer, que tome este data, y lo envie al API para realizar el registro de usuario.
+    props.signUp(data);
   };
   // const [value, setValue] = useState();
         
   console.log(watch("email")); // watch input value by passing the name of it
+  console.log(watch("displayName")); // watch input value by passing the name of it
   console.log(watch("password")); // watch input value by passing the name of it
 
   return (
@@ -24,6 +24,14 @@ const SignUp = () => {
       <Form.Control type="email" placeholder="Enter email" {...register("email", { required: true })}/>
       <Form.Text className="text-muted">
         We'll never share your email with anyone else.
+      </Form.Text>
+    </Form.Group>
+
+    <Form.Group controlId="formBasicDisplayName">
+      <Form.Label>Display Name</Form.Label>
+      <Form.Control type="text" placeholder="Enter displayName" {...register("displayName", { required: true })}/>
+      <Form.Text className="text-muted">
+        We'll never share your nanme with anyone else.
       </Form.Text>
     </Form.Group>
 

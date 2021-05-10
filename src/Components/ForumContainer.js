@@ -138,6 +138,59 @@ const ForumContainer = () => {
         });
     }
 
+    const signUp = (data) => {
+        console.log("Sign UP");
+        console.log(data);
+
+        const newUser = {
+            email: data.email,
+            displayName: data.displayName,
+            password: data.password,
+          }
+  
+          const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newUser)
+          };
+          fetch('https://api-rest-example-21.herokuapp.com/api/signup', requestOptions)
+              .then(response => response.json())
+              //.then(data => setPostId(data.id));
+              .then(data => {
+                  console.log(data);
+                  console.log(data.token);
+                  localStorage.setItem('token', data.token);
+                  //getPosts();
+                  history.push(`/`);
+              });
+    }
+    
+    const signIn = (data) => {
+        console.log("Sign In");
+        console.log(data);
+
+        const newUser = {
+            email: data.email,
+            password: data.password,
+        }
+  
+          const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newUser)
+          };
+          fetch('https://api-rest-example-21.herokuapp.com/api/signin', requestOptions)
+              .then(response => response.json())
+              //.then(data => setPostId(data.id));
+              .then(data => {
+                  console.log(data);
+                  console.log(data.token);
+                  localStorage.setItem('token', data.token);
+                  //getPosts();
+                  history.push(`/`);
+              });
+    }
+
     useEffect(() => {
         getPosts();
     },[]);
@@ -170,12 +223,13 @@ const ForumContainer = () => {
         </Route>
         <Route path={"/signin"} >     
             <SignIn
+                signIn={signIn}
             
             />
         </Route>
         <Route path={"/signup"} >     
             <SignUp
-            
+                signUp={signUp}
             />
         </Route>
         {/* <Route path="/about">
