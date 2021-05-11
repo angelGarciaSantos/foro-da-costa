@@ -16,13 +16,13 @@ const LogOut = props => {
 
   return (
 
-  <Form className="tc" onSubmit={handleSubmit(onSubmit)}>
+  <Form className="tc courier" onSubmit={handleSubmit(onSubmit)}>
     <Form.Group controlId="formBasicText">
       <Form.Label>¿Realmente deseas cerrar tu sesión?</Form.Label>
     </Form.Group>
     <Button variant="primary" type="submit">
       Cerrar Sesión
-    </Button>
+    </Button> 
   </Form>
   )
 }

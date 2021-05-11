@@ -1,4 +1,5 @@
 import React from "react";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import tachyons from 'tachyons';
 import TextEditorJodit from "./TextEditorJodit";
@@ -20,23 +21,24 @@ const CreatePost = props => {
   console.log(watch("content")); // watch input value by passing the name of it
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form className="courier tc" onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      {/* <input defaultValue="test" {...register("example")} /> */}
-      <label className="courier pa3">Titulo</label>
-      {/* include validation with required or other standard HTML validation rules */}
-      <input className="courier"{...register("title", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.title && <span>Debes introducir un título</span>}
-      <label className="courier pa3">Contenido</label>
-      {/* include validation with required or other standard HTML validation rules */}
-      <input className="courier" {...register("content", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.content && <span>Debes introducir algún contenido</span>}
-      
-      <input className="courier" type="submit" />
-    </form>
+
+
+ <Form className="tc courier" onSubmit={handleSubmit(onSubmit)}>
+  <Form.Group controlId="formBasicTitle">
+    <Form.Label>Titulo</Form.Label>
+    <Form.Control type="text" placeholder="Introduce el titulo del tema" {...register("title", { required: true })}/>
+  </Form.Group>
+
+  <Form.Group controlId="formBasicDisplayName">
+    <Form.Label>Contenido</Form.Label>
+    <Form.Control type="text" placeholder="Introduce el contenido del tema" {...register("content", { required: true })}/>
+  </Form.Group>
+
+  <Button variant="primary" type="submit">
+    Crear
+  </Button>
+</Form>
+
   );
 }
 

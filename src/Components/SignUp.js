@@ -18,7 +18,7 @@ const SignUp = props => {
 
   return (
 
-  <Form className="tc" onSubmit={handleSubmit(onSubmit)}>
+  <Form className="tc courier" onSubmit={handleSubmit(onSubmit)}>
     <Form.Group controlId="formBasicEmail">
       <Form.Label>Correo Electrónico</Form.Label>
       <Form.Control type="email" placeholder="Introduce un correo electrónico válido" {...register("email", { required: true })}/>
