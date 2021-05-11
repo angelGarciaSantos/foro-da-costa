@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, forceUpdate } from "react"
 import PostsList from "./PostsList"
 import { Route, Switch } from "react-router-dom"
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -7,6 +7,7 @@ import Logo from '../Assets/Logo.jpg'
 import PostDetail from "./PostDetail";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import LogOut from "./LogOut";
 import CreatePost from "./CreatePost";
 import { useHistory, useParams } from "react-router-dom";
 // import { Button } from 'react-bootstrap';
@@ -94,35 +95,61 @@ const ForumContainer = () => {
           date: newDate,
         }
         setPosts([...posts, newPost]);
+        console.log('Creating post');
+        const token = localStorage.getItem('token');
 
-
-        // POST request using fetch inside useEffect React hook
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newPost)
-        };
-        fetch('https://api-rest-example-21.herokuapp.com/api/post', requestOptions)
-            .then(response => response.json())
-            //.then(data => setPostId(data.id));
-            .then(data => {
-                getPosts();
-                history.push(`/`);
-            });
+        if (token) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
+                    'Host': 'api.producthunt.com'
+                },
+                body: JSON.stringify(newPost)
+            };
+            fetch('https://api-rest-example-21.herokuapp.com/api/post', requestOptions)
+                .then(response => response.json())
+                //.then(data => setPostId(data.id));
+                .then(data => {
+                    getPosts();
+                    history.push(`/`);
+                });
+        }
+        else {
+            console.log('No estás autenticado')
+        }    
 
     }
 
     const deletePost = (id) => {
         console.log(`Deleting post: ${id}`);
-        fetch(`https://api-rest-example-21.herokuapp.com/api/post/${id}`, {
-            method: 'DELETE',
-            })
-            .then(res => res.text()) // or res.json()
-            .then(res => {
-                console.log(res);
-                getPosts();
-                history.push(`/`); 
-            })
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            fetch(`https://api-rest-example-21.herokuapp.com/api/post/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
+                    'Host': 'api.producthunt.com'
+                }
+                })
+                .then(res => res.text()) // or res.json()
+                .then(res => {
+                    console.log(res);
+                    getPosts();
+                    history.push(`/`); 
+                })
+                .catch(err =>  {
+                    console.log(`Error con la autenticación al eliminar post: ${err}`);
+                })
+            } 
+        else {
+            console.log('No estás autenticado')
+        }    
     }
 
     const getPosts = () => {
@@ -162,6 +189,8 @@ const ForumContainer = () => {
                   localStorage.setItem('token', data.token);
                   //getPosts();
                   history.push(`/`);
+
+                  window.location.reload();
               });
     }
     
@@ -188,8 +217,57 @@ const ForumContainer = () => {
                   localStorage.setItem('token', data.token);
                   //getPosts();
                   history.push(`/`);
+
+                  window.location.reload();
               });
     }
+
+    const logOut = () => {
+        console.log("Log Out");
+        // remove token
+        localStorage.removeItem('token');
+        
+        // remove all
+        //localStorage.clear();
+        history.push(`/`);
+        window.location.reload();
+    }
+
+    const isUserLogged = () => {
+        var item = localStorage.getItem('token');
+        return item ? true : false;
+        // const token = localStorage.getItem('token');
+
+        // if (token) {
+        //     const requestOptions = {
+        //         method: 'GET',
+        //         headers: {
+        //           'Accept': 'application/json',
+        //           'Content-Type': 'application/json',
+        //           'Authorization': 'Bearer ' + token,
+        //           'Host': 'api.producthunt.com'
+        //         }
+        //     };
+    
+        //     fetch('https://api-rest-example-21.herokuapp.com/api/private', requestOptions)
+        //           .then(response => response.json())
+        //           //.then(data => setPostId(data.id));
+        //           .then(data => {
+        //               console.log("Usuario autenticado");
+        //               console.log(data);
+        //               console.log(token);
+        //               return true;
+        //           })
+        //           .catch(err => {
+        //                 console.log('Error comprobando la autenticación')
+        //                 return false;
+        //           })    
+        // }
+        // else {
+        //     console.log('Usuario no autenticado')
+        //     return false;
+        
+    };
 
     useEffect(() => {
         getPosts();
@@ -205,9 +283,7 @@ const ForumContainer = () => {
                 openPostDetailProps={openPostDetail}
             />
             
-            <div className="tc">
-                <a className="courier f6 link dim ba ph3 pv2 mb2 dib mid-gray" onClick={createPost}>Crear nuevo tema</a>
-            </div>
+            { isUserLogged()  ?  <div className="tc"><a className="courier f6 link dim ba ph3 pv2 mb2 dib mid-gray" onClick={createPost}>Crear nuevo tema</a></div> : null }
         </Route>
         <Route path={"/post/:id"} >     
             <PostDetail
@@ -230,6 +306,12 @@ const ForumContainer = () => {
         <Route path={"/signup"} >     
             <SignUp
                 signUp={signUp}
+            />
+        </Route>  
+        <Route path={"/logout"} >     
+            <LogOut
+                logOut={logOut}
+                
             />
         </Route>
         {/* <Route path="/about">

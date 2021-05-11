@@ -6,10 +6,13 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-boots
 
 const NavbarBoot = props => {
 
+ const isUserLogged = () => {
+    var item = localStorage.getItem('token');
+    return item ? true : false;
+ }
 
   return (
-<Navbar bg="light" expand="lg">
-
+        <Navbar bg="light" expand="lg">
         <Navbar.Brand className="courier" href="#/">
         <i class="fi-rr-glasses"></i>
         {/* <img
@@ -25,8 +28,9 @@ const NavbarBoot = props => {
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
             <Nav.Link href="#/" className="courier" >Inicio</Nav.Link>
-            <Nav.Link href="#/signup" className="courier" >Registro</Nav.Link>
-            <Nav.Link href="#/signin" className="courier" >Entrar</Nav.Link>
+            { isUserLogged()  ? null : <Nav.Link href="#/signup" className="courier" >Registro</Nav.Link>}
+            { isUserLogged()  ? null : <Nav.Link href="#/signin" className="courier" >Entrar</Nav.Link>}
+            { isUserLogged()  ? <Nav.Link href="#/logout" className="courier" >Salir</Nav.Link> : null}
             <NavDropdown title="Opciones" id="basic-nav-dropdown" className="courier">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

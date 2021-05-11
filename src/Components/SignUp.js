@@ -18,29 +18,23 @@ const SignUp = props => {
 
   return (
 
-  <Form onSubmit={handleSubmit(onSubmit)}>
+  <Form className="tc" onSubmit={handleSubmit(onSubmit)}>
     <Form.Group controlId="formBasicEmail">
-      <Form.Label>Email address</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" {...register("email", { required: true })}/>
-      <Form.Text className="text-muted">
-        We'll never share your email with anyone else.
-      </Form.Text>
+      <Form.Label>Correo Electrónico</Form.Label>
+      <Form.Control type="email" placeholder="Introduce un correo electrónico válido" {...register("email", { required: true })}/>
     </Form.Group>
 
     <Form.Group controlId="formBasicDisplayName">
-      <Form.Label>Display Name</Form.Label>
-      <Form.Control type="text" placeholder="Enter displayName" {...register("displayName", { required: true })}/>
-      <Form.Text className="text-muted">
-        We'll never share your nanme with anyone else.
-      </Form.Text>
+      <Form.Label>Pseudónimo</Form.Label>
+      <Form.Control type="text" placeholder="Introduce un pseudónimo" {...register("displayName", { required: true })}/>
     </Form.Group>
 
     <Form.Group controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <Form.Control type="password" placeholder="Password" {...register("password", { required: true })} />
+      <Form.Label>Contraseña</Form.Label>
+      <Form.Control type="password" placeholder="Crea una contraseña" {...register("password", { required: true })} />
     </Form.Group>
     <Button variant="primary" type="submit">
-      Submit
+      Registro
     </Button>
   </Form>
   )
