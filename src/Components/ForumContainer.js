@@ -10,6 +10,7 @@ import SignUp from "./SignUp";
 import LogOut from "./LogOut";
 import CreatePost from "./CreatePost";
 import { useHistory, useParams } from "react-router-dom";
+import { trackPromise } from 'react-promise-tracker';
 // import { Button } from 'react-bootstrap';
 import { v4 as uuidv4 } from "uuid"
 import tachyons from 'tachyons';
@@ -154,6 +155,8 @@ const ForumContainer = () => {
 
     const getPosts = () => {
         console.log("Obteniendo info del API");
+
+        trackPromise(
         fetch('https://api-rest-example-21.herokuapp.com/api/post')
         .then(response => response.json())
         .then(data => {
@@ -162,8 +165,9 @@ const ForumContainer = () => {
             setPosts(data.posts);
     
             return data.posts;
-        });
+        }));
     }
+    
 
     const signUp = (data) => {
         console.log("Sign UP");
