@@ -17,6 +17,7 @@ import tachyons from 'tachyons';
 
 const ForumContainer = () => {
   const [posts, setPosts] = useState([])
+  const [user, setUser] = useState({logged: false, name: "Anónimo"})
   const history = useHistory();
 
   
@@ -88,11 +89,13 @@ const ForumContainer = () => {
 
     const createNewPost = (data) => {
         let newDate = new Date()
+        console.log(user);
+        console.log(user.name);
         const newPost = {
           id: uuidv4(),
           title: data.title,
           content: data.content,
-          user: "Anónimo",
+          user: user.name,
           date: newDate,
         }
         setPosts([...posts, newPost]);
@@ -157,7 +160,7 @@ const ForumContainer = () => {
         console.log("Obteniendo info del API");
 
         trackPromise(
-        fetch('https://api-rest-example-21.herokuapp.com/api/post')
+            fetch('https://api-rest-example-21.herokuapp.com/api/post')
         .then(response => response.json())
         .then(data => {
             //setPosts(data.posts);
@@ -192,9 +195,10 @@ const ForumContainer = () => {
                   console.log(data.token);
                   localStorage.setItem('token', data.token);
                   //getPosts();
+                  console.log(newUser.displayName)
                   history.push(`/`);
-
-                  window.location.reload();
+                  setUser({logged: true, name: newUser.displayName})
+                  //window.location.reload();
               });
     }
     
@@ -217,13 +221,14 @@ const ForumContainer = () => {
               //.then(data => setPostId(data.id));
               .then(data => {
                   console.log(data);
+                  //TODO: detectar si viene un "no existe el usuario en este punto, para no hacer nada"
                   console.log(data.token);
                   localStorage.setItem('token', data.token);
                   //getPosts();
                   history.push(`/`);
-
-                  window.location.reload();
-              });
+                  setUser({logged: true, name: data.displayName})
+                  //window.location.reload();
+              })
     }
 
     const logOut = () => {
@@ -234,12 +239,22 @@ const ForumContainer = () => {
         // remove all
         //localStorage.clear();
         history.push(`/`);
-        window.location.reload();
+        setUser({logged: false, name: "Anónimo"})
+        //window.location.reload();
     }
 
     const isUserLogged = () => {
-        var item = localStorage.getItem('token');
-        return item ? true : false;
+        console.log(`Usuario logueado: ${user}`)
+        
+        return user.logged;  
+        
+        // var item = localStorage.getItem('token');
+        // return item ? true : false;
+
+
+
+
+
         // const token = localStorage.getItem('token');
 
         // if (token) {
@@ -279,7 +294,9 @@ const ForumContainer = () => {
 
   return (
     <>
-    <Navbar />
+    <Navbar
+        isUserLogged={isUserLogged} 
+    />
     <Switch>
         <Route exact path="/">     
             <PostsList
@@ -292,7 +309,8 @@ const ForumContainer = () => {
         <Route path={"/post/:id"} >     
             <PostDetail
                 getPostById={getPostById}  
-                deletePost={deletePost}          
+                deletePost={deletePost}  
+                isUserLogged={isUserLogged}        
             />
         </Route>
         <Route path={"/new"} >     

@@ -12,8 +12,7 @@ const PostDetail = props => {
     }
 
     const isUserLogged = () => {
-      var item = localStorage.getItem('token');
-      return item ? true : false;
+      return props.isUserLogged();
    }
 
     const { user, _id, title, content, date } = props.getPostById(GetRouteParams());
