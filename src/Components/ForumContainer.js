@@ -217,17 +217,23 @@ const ForumContainer = () => {
               body: JSON.stringify(newUser)
           };
           fetch('https://api-rest-example-21.herokuapp.com/api/signin', requestOptions)
-              .then(response => response.json())
+              .then(response => {
+                  if (response.status != 200)  {
+                    throw `Error: ${response.status}`
+                  }
+                  return response.json();
+               })
               //.then(data => setPostId(data.id));
               .then(data => {
                   console.log(data);
-                  //TODO: detectar si viene un "no existe el usuario en este punto, para no hacer nada"
                   console.log(data.token);
                   localStorage.setItem('token', data.token);
                   //getPosts();
                   history.push(`/`);
                   setUser({logged: true, name: data.displayName})
                   //window.location.reload();
+              }).catch(err => {
+                  console.log(`Error en la autenticación: ${err}`)
               })
     }
 
